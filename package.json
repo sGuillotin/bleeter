@@ -1,0 +1,30 @@
+{
+  "name": "bleeter",
+  "version": "1.0.0",
+  "description": "A remake of the GTA V social media site bleeter.biz for IGME 430",
+  "keywords": [
+    "MVC",
+    "Redis",
+    "MongoDB",
+    "Mongoose",
+    "Login",
+    "Logout",
+    "Signout",
+    "GTA-V"
+  ],
+  "homepage": "https://github.com/sGuillotin/bleeter#readme",
+  "bugs": {
+    "url": "https://github.com/sGuillotin/bleeter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sGuillotin/bleeter.git"
+  },
+  "license": "Apache-2.0",
+  "author": "SFG",
+  "type": "commonjs",
+  "main": "./src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
