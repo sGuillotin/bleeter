@@ -22,6 +22,7 @@ let AccountModel = {};
    by bcrypt), and the created date.
 */
 const AccountSchema = new mongoose.Schema({
+  // display name
   username: {
     type: String,
     required: true,

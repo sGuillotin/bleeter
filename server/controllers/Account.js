@@ -9,6 +9,18 @@ const profilePage = (req, res) => {
     return res.render('profile');
 };
 
+const getProfile = async (req, res) => {
+    // try {
+    //     const query = { authorId: req.session.account._id };
+    //     const docs = await Domo.find(query).select('content').lean().exec();
+    //     return res.json({ domos: docs });
+    // } catch (err) {
+    //     console.log(err);
+    //     return res.status(500).json({ error: 'Error retrieving bleets!' });
+    // }
+};
+
+
 
 const logout = (req, res) => {
   req.session.destroy(); // call this on logout so server knows they are no longer logged in
@@ -66,6 +78,7 @@ const signup = async (req, res) => {
 module.exports = {
   loginPage,
   profilePage,
+  getProfile,
   login,
   logout,
   signup,

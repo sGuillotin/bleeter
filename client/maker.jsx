@@ -35,7 +35,6 @@ const DomoForm = (props) => {
             method="POST"
             className="domoForm"
         >
-            {/* <label htmlFor="postContent">Name: </label> */}
             <input id="postContent" type="text" name="name" placeholder="your bleet here" />
             {/* <label htmlFor="domoAge">Age: </label>
             <input id="domoAge" type="number" min="0" name="age" /> */}
