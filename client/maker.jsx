@@ -7,23 +7,23 @@ const handleDomo = (e, onDomoAdded) => {
     e.preventDefault();
     helper.hideError();
 
-    const name = e.target.querySelector('#domoName').value;
-    const age = e.target.querySelector('#domoAge').value;
-    const level = e.target.querySelector('#domoLevel').value;
+    const content = e.target.querySelector('#postContent').value;
+    // const age = e.target.querySelector('#domoAge').value;
+    // const level = e.target.querySelector('#domoLevel').value;
 
-    if (!name || !age || !level) {
-        helper.handleError('All fields are required');
+    if (!content) {
+        helper.handleError('empty bleet!');
         return false;
     }
 
-    helper.sendPost(e.target.action, { name, age, level }, onDomoAdded);
+    helper.sendPost(e.target.action, { content }, onDomoAdded);
     return false;
 };
 
-const handleLevelUp = (onLevelUp) => {
-    helper.hideError();
-    helper.sendPost('/levelup', {}, onLevelUp);
-};
+// const handleLevelUp = (onLevelUp) => {
+//     helper.hideError();
+//     helper.sendPost('/levelup', {}, onLevelUp);
+// };
 
 const DomoForm = (props) => {
     return (
@@ -35,20 +35,18 @@ const DomoForm = (props) => {
             method="POST"
             className="domoForm"
         >
-            <label htmlFor="domoName">Name: </label>
-            <input id="domoName" type="text" name="name" placeholder="Domo Name" />
-            <label htmlFor="domoAge">Age: </label>
-            <input id="domoAge" type="number" min="0" name="age" />
-            <label htmlFor="domoLevel">Level: </label>
-            <input id="domoLevel" type="number" min="0" name="level" />
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
-            <button
+            {/* <label htmlFor="postContent">Name: </label> */}
+            <input id="postContent" type="text" name="name" placeholder="your bleet here" />
+            {/* <label htmlFor="domoAge">Age: </label>
+            <input id="domoAge" type="number" min="0" name="age" /> */}
+            <input className="makeDomoSubmit" type="submit" value="Bleet" />
+            {/* <button
                 type="button"
                 className="levelUpButton"
                 onClick={() => handleLevelUp(props.triggerReload)}
             >
                 Level Up All Domos
-            </button>
+            </button> */}
         </form>
     );
 };
@@ -68,19 +66,19 @@ const DomoList = (props) => {
     if (domos.length === 0) {
         return (
             <div className="domoList">
-                <h3 className="emptyDomo">No Domos Yet!</h3>
+                <h3 className="emptyDomo">No Bleets Yet!</h3>
             </div>
         );
     }
 
     const domoNodes = domos.map((domo) => {
         return (
-            // TODO WATCH FOR ERROR - might be domo._id
-            <div key={domo.id} className="domo">
+            // TODO WATCH FOR ERROR - might be domo._id / domo.id
+            <div key={domo._id} className="domo">
                 <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName">Name: {domo.name}</h3>
-                <h3 className="domoAge">Age: {domo.age}</h3>
-                <h3 className="domoLevel">Level: {domo.level}</h3>
+                <h3 className="postContent">{domo.content}</h3>
+                {/* <h3 className="domoAge">Age: {domo.age}</h3>
+                <h3 className="domoLevel">Level: {domo.level}</h3> */}
             </div>
         );
     });

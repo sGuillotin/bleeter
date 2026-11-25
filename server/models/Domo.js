@@ -1,40 +1,30 @@
 const mongoose = require('mongoose');
 const _ = require('underscore');
 
-const setName = (name) => _.escape(name).trim();
+const setContent = (content) => _.escape(content).trim();
 
 const DomoSchema = new mongoose.Schema({
-    name: {
+    content: { // name --> content
         type: String,
         required: true,
         trim: true,
-        set: setName,
+        set: setContent,
     },
-    age: {
-        type: Number,
-        min: 0,
-        required: true,
-    },
-    owner: {
+    authorId: { // owner --> authorId
         type: mongoose.Schema.ObjectId,
         required: true,
         ref: 'Account',
     },
-    level: {
-        type: Number,
-        min: 0,
-        required: true,
-    },
-    createdDate: {
-        type: Date,
-        default: Date.now,
-    },
+    // isAd
+    // isPrivate
+    // createdDate - "X ago" feature
 });
 
+// what we need to send to client
 DomoSchema.statics.toAPI = (doc) => ({
-    name: doc.name,
-    age: doc.age,
-    level: doc.level
+    content: doc.content,
+    // age: doc.age,
+    // level: doc.level
 });
 
 const DomoModel = mongoose.model('Domo', DomoSchema);

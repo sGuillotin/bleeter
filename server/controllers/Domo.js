@@ -6,55 +6,53 @@ const makerPage = async (req, res) => {
 };
 
 const makeDomo = async (req, res) => {
-    if (!req.body.name || !req.body.age || !req.body.level) {
-        return res.status(400).json({ error: 'Name, age, and level are required!' });
+    if (!req.body.content) {
+        return res.status(400).json({ error: 'text is required, apparently.' });
     }
 
     const domoData = {
-        name: req.body.name,
-        age: req.body.age,
-        level: req.body.level,
-        owner: req.session.account._id,
+        content: req.body.content,
+        authorId: req.session.account._id,
     };
 
     try {
         const newDomo = new Domo(domoData);
         await newDomo.save();
-        return res.status(201).json({ name: newDomo.name, age: newDomo.age, level: newDomo.level });
+        console.log({ content: newDomo.content, authorId: newDomo.authorId });
+        return res.status(201).json({ content: newDomo.content, authorId: newDomo.authorId });
     } catch (err) {
         console.log(err);
         if (err.code === 11000) {
-            return res.status(400).json({ error: 'Domo already exists!' });
+            return res.status(400).json({ error: 'Bleet already exists.' });
         }
-        return res.status(500).json({ error: 'An error occurred making domo!' });
+        return res.status(500).json({ error: 'An error occurred while Bleeting.' });
     }
 };
 
 const getDomos = async (req, res) => {
     try {
-        const query = { owner: req.session.account._id };
-        const docs = await Domo.find(query).select('name age level').lean().exec();
+        const query = { authorId: req.session.account._id };
+        const docs = await Domo.find(query).select('content').lean().exec();
         return res.json({ domos: docs });
     } catch (err) {
         console.log(err);
-        return res.status(500).json({ error: 'Error retrieving domos!' });
+        return res.status(500).json({ error: 'Error retrieving bleets!' });
     }
 };
 
-const levelUpDomos = async (req, res) => {
-    try {
-        const query = { owner: req.session.account._id };
-        await Domo.updateMany(query, { $inc: { level: 1 } }).exec();
-        return res.status(200).json({ message: 'All Domos leveled up!' });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({ error: 'Error leveling up domos!' });
-    }
-};
+// const levelUpDomos = async (req, res) => {
+//     try {
+//         const query = { authorId: req.session.account._id };
+//         await Domo.updateMany(query, { $inc: { level: 1 } }).exec();
+//         return res.status(200).json({ message: 'All Domos leveled up!' });
+//     } catch (err) {
+//         console.log(err);
+//         return res.status(500).json({ error: 'Error leveling up domos!' });
+//     }
+// };
 
 module.exports = {
     makerPage,
     makeDomo,
     getDomos,
-    levelUpDomos,
 };

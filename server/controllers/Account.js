@@ -5,6 +5,11 @@ const loginPage = (req, res) => {
   return res.render('login');
 };
 
+const profilePage = (req, res) => {
+    return res.render('profile');
+};
+
+
 const logout = (req, res) => {
   req.session.destroy(); // call this on logout so server knows they are no longer logged in
   return res.redirect('/');
@@ -57,8 +62,10 @@ const signup = async (req, res) => {
   }
 };
 
+
 module.exports = {
   loginPage,
+  profilePage,
   login,
   logout,
   signup,

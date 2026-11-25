@@ -33,6 +33,7 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // isPremium
   createdDate: {
     type: Date,
     default: Date.now,

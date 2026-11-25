@@ -1,5 +1,5 @@
 # Welcome to Bleeter!  
-A remake of the GTA V social media site bleeter.biz for IGME 430.  
+A remake of the GTA V social media site bleeter.biz for IGME 430. Not affiliated with Rockstar Games.  
   
 ## _"Life suddenly got quick!"_  
 *"Information isn't about imparting knowledge anymore. The internet changed all that.*  
