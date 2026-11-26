@@ -6,6 +6,7 @@
 */
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+const { type } = require('node:os');
 
 /* When generating a password hash, bcrypt (and most other password hash
    functions) use a "salt". The salt is simply extra data that gets hashed
@@ -15,6 +16,13 @@ const mongoose = require('mongoose');
 */
 const saltRounds = 10;
 
+/**
+ * define the array of default user images a user could have
+ */
+// const defaultImages = [
+//   '/assets/img/defaults/pfp1.png'
+// ];
+
 let AccountModel = {};
 
 /* Our schema defines the data we will store. A username (string of alphanumeric
@@ -22,7 +30,16 @@ let AccountModel = {};
    by bcrypt), and the created date.
 */
 const AccountSchema = new mongoose.Schema({
-  // display name
+  img: {
+    type: String,
+    // default: () => defaultImages[Math.floor(Math.random() * defaultImages.length)]
+    default: '/assets/img/sheep-icon.jpeg',
+  },
+  // displayName: {
+  //   type: String,
+  //   required: true,
+  //   trim: true,
+  // },
   username: {
     type: String,
     required: true,
@@ -43,6 +60,8 @@ const AccountSchema = new mongoose.Schema({
 
 // Converts a doc to something we can store in redis later on.
 AccountSchema.statics.toAPI = (doc) => ({
+  img: doc.img,
+  displayName: doc.displayName,
   username: doc.username,
   _id: doc._id,
 });

@@ -36,8 +36,6 @@ const DomoForm = (props) => {
             className="domoForm"
         >
             <input id="postContent" type="text" name="name" placeholder="your bleet here" />
-            {/* <label htmlFor="domoAge">Age: </label>
-            <input id="domoAge" type="number" min="0" name="age" /> */}
             <input className="makeDomoSubmit" type="submit" value="Bleet" />
             {/* <button
                 type="button"
@@ -73,11 +71,10 @@ const DomoList = (props) => {
     const domoNodes = domos.map((domo) => {
         return (
             // TODO WATCH FOR ERROR - might be domo._id / domo.id
+            // TODO set to author's pfp, etc
             <div key={domo._id} className="domo">
                 <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
                 <h3 className="postContent">{domo.content}</h3>
-                {/* <h3 className="domoAge">Age: {domo.age}</h3>
-                <h3 className="domoLevel">Level: {domo.level}</h3> */}
             </div>
         );
     });

@@ -10,14 +10,14 @@ const profilePage = (req, res) => {
 };
 
 const getProfile = async (req, res) => {
-    // try {
-    //     const query = { authorId: req.session.account._id };
-    //     const docs = await Domo.find(query).select('content').lean().exec();
-    //     return res.json({ domos: docs });
-    // } catch (err) {
-    //     console.log(err);
-    //     return res.status(500).json({ error: 'Error retrieving bleets!' });
-    // }
+    try {
+        const account = await Account.findById(req.session.account._id).lean().exec();
+        console.log("account found:\n", account);
+        return res.json(account);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Error retrieving account information. Please contact support.' });
+    }
 };
 
 

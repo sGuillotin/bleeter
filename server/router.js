@@ -3,6 +3,7 @@ const mid = require('./middleware');
 
 const router = (app) => {
     app.get('/getDomos', mid.requiresLogin, controllers.Domo.getDomos);
+    app.get('/getProfile', mid.requiresLogin, controllers.Account.getProfile);
 
     app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
     app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
@@ -15,7 +16,6 @@ const router = (app) => {
     app.post('/maker', mid.requiresLogin, controllers.Domo.makeDomo);
     
     app.get('/profile', mid.requiresLogin, controllers.Account.profilePage);
-    app.get('/getProfile', mid.requiresLogin, controllers.Account.getProfile);
 
     // app.post('/levelup', mid.requiresLogin, controllers.Domo.levelUpDomos)
 

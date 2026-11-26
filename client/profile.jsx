@@ -24,36 +24,40 @@ const ChangePasswordForm = () => {
     );
 };
 
-// const ProfileData = (props) => {
-const ProfileData = () => {
-    // const [profileData, setData] = useState(props.profileData);
+const ProfileData = (props) => {
+    const [profileData, setData] = useState({
+        img: 'assets/img/bleeter-sheep.png',
+        // displayName: 'M Wazowski',
+        username: 'm-wazowski'
+    });
 
     // use magic to get data from mongo user data
-    // useEffect(() => {
-    //     const loadDataFromServer = async () => {
-    //         const response = await fetch('/getProfile');
-    //         const data = await response.json();
-    //         setData(data.profileData);
-    //     };
-    //     loadDataFromServer();
-    // }, [props.reloadData]);
+    useEffect(() => {
+        const loadDataFromServer = async () => {
+            const response = await fetch('/getProfile');
+            const data = await response.json();
+            setData(data.profileData);
+        };
+        loadDataFromServer();
+    }, [props.reloadData]);
 
-    const profileData = {
-        img: "../hosted/img/bleeter-sheep.png",
-        displayName: "fluffy",
-        username: "fluffyo234856"
-    };
+    // test data
+    // const profileData = {
+    //     img: "./path",
+    //     displayName: "fluffy",
+    //     username: "fluffyo234856"
+    // };
 
     // display data - format here
     return (
         <div id="data"
-                style={{display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr", gap: "15px"}}>
-            <div style={{gridRow: "span 2", padding: "20px"}}>
-                <img src={profileData.img} /></div>
-            <div id="top-right" style={{padding: "20px"}}>
-                {profileData.displayName}
+                style={{display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr", gap: "15px", margin: "30px 0"}}>
+            <div id="left" style={{placeSelf: "center end"}}>
+                <img src={profileData.img} alt={`${profileData.username}'s avatar`} />
+                {/* <img src="assets/img/bleeter-sheep.png" alt={`${profileData.username}'s avatar`} /> */}
             </div>
-            <div id='bottom-right' style={{padding: "20px"}}>
+            <div id="right">
+                {/* {profileData.displayName}<br/> */}
                 @{profileData.username}
             </div>
         </div>
@@ -61,13 +65,13 @@ const ProfileData = () => {
 };
 
 const PageContent = () => {
-    // const [reloadData, setReloadData] = useState(false);
+    const [reloadData, setReloadData] = useState(false);
 
     return (
         <div>
             <div id='profileHeader'>
-                {/* <ProfileData data={[]} reloadData={reloadData} /> */}
-                <ProfileData />
+                <ProfileData reloadData={reloadData} />
+                {/* <ProfileData /> */}
             </div>
             {/*
             <div id='changePasswordFormHolder'>
